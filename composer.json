@@ -1,0 +1,26 @@
+{
+    "name": "blumewas/acorn-smtp-mail",
+    "type": "package",
+    "description": "SMTP mail driver for Acorn",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Andreas Schneider"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Blumewas\\AcornSmtpMail\\": "src/"
+        }
+    },
+    "require": {
+        "php": "^8.0"
+    },
+    "extra": {
+        "acorn": {
+            "providers": [
+                "Blumewas\\AcornSmtpMail\\Providers\\AcornSmtpMailProvider"
+            ]
+        }
+    }
+}
