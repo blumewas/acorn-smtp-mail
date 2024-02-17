@@ -50,7 +50,6 @@ class ConfigureSmtpMail
 
         $mail->SMTPDebug = $this->debug ?? 0;
 
-
         $mail->SMTPSecure = $this->secure;
         $mail->SMTPOptions = [
             'ssl' => [
@@ -59,8 +58,6 @@ class ConfigureSmtpMail
                 'allow_self_signed' => true
             ],
         ];
-
-        $mail->SMTPAutoTLS = false;
 
         $mail->Timeout = $this->timeout ?? 120;
 
