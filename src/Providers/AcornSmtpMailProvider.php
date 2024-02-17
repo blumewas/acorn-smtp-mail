@@ -4,6 +4,7 @@ namespace Blumewas\AcornSmtpMail\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use Blumewas\AcornSmtpMail\Mail\ConfigureSmtpMail;
+use Blumewas\AcornSmtpMail\Mail\VerifySmtpMail;
 
 class AcornSmtpMailProvider extends ServiceProvider
 {
@@ -22,7 +23,9 @@ class AcornSmtpMailProvider extends ServiceProvider
             __DIR__.'/../../config/smtp-mail.php' => $this->app->configPath('smtp-mail.php'),
         ], 'config');
 
-        new ConfigureSmtpMail();
+        $config = new ConfigureSmtpMail();
+
+        new VerifySmtpMail($config);
     }
 
 }

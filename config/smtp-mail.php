@@ -30,4 +30,6 @@ return [
     'forcefrom' => env('WP_SMTP_FORCEFROM'),
 
     'forcefromname' => env('WP_SMTP_FORCEFROMNAME'),
+
+    'timeout' => env('WP_SMTP_TIMEOUT', 120),
 ];
