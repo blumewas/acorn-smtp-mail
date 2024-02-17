@@ -60,6 +60,7 @@ class ConfigureSmtpMail
         }
 
         $mail->SMTPSecure = $this->secure;
+        $mail->SMTPAutoTLS = false;
 
         $mail->Timeout = $this->timeout ?? 120;
 

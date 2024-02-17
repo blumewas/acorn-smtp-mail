@@ -87,6 +87,7 @@ class VerifySmtpMail
             }
 
             $mail->SMTPSecure = $config['secure'];
+            $mail->SMTPAutoTLS = false;
 
             $mail->Timeout = $config['timeout'] ?? 120;
 
