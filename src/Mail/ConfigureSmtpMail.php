@@ -28,14 +28,17 @@ class ConfigureSmtpMail
     {
         $this->loadConfig();
 
-        // add_filter('phpmailer_init', [$this, 'configureSmtp'], PHP_INT_MAX);
-        // add_filter('phpmailer_init', function ($mail) {
-        //     $this->configureSmtp($mail);
-        // }, PHP_INT_MAX);
+        add_filter('phpmailer_init', function ($mail) {
+            $this->configureSmtp($mail);
+        }, PHP_INT_MAX);
 
-        // add_action('wp_mail_failed', function ($wp_error) {
-        //     $this->logMailErrors($wp_error);
-        // }, PHP_INT_MAX);
+        add_action('wp_mail_failed', function ($wp_error) {
+            $this->logMailErrors($wp_error);
+        }, PHP_INT_MAX);
+
+        if ($this->debug) {
+            Log::error('SMTP Mailer Debug: ' . json_encode($this->config()));
+        }
     }
 
     /**

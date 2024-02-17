@@ -88,7 +88,6 @@ class VerifySmtpMail
 
             $mail->SMTPSecure = $config['secure'];
 
-
             $mail->Timeout = $config['timeout'] ?? 120;
 
             if ($config['forcefrom']) {
@@ -108,6 +107,9 @@ class VerifySmtpMail
             $mail->clearAllRecipients();
         } catch (\PHPMailer\PHPMailer\Exception $error) {
             Log::error($error->errorMessage());
+            if ($config['debug'] ?? false) {
+                print_r($config);
+            }
 
             return $this->notice(
                 $error->errorMessage(),
@@ -116,6 +118,10 @@ class VerifySmtpMail
             );
         } catch (\Exception $error) {
             Log::error($error->errorMessage());
+            if ($config['debug'] ?? false) {
+                print_r($config);
+            }
+
             return $this->notice(
                 $error->getMessage(),
                 'error',
