@@ -59,14 +59,9 @@ class ConfigureSmtpMail
             $mail->Password = $this->password;
         }
 
-        if ($this->secure) {
-            $mail->SMTPOptions = ['ssl' => true];
-            $mail->SMTPSecure = $this->secure;
+        $mail->SMTPSecure = $this->secure;
 
-            $mail->SMTPAutoTLS = $this->secure === 'ssl' ? false : true;
-        }
-
-        $mail->Timeout = $this->timeout;
+        $mail->Timeout = $this->timeout ?? 120;
 
         if ($this->forcefrom && $this->forcefromname) {
             $mail->setFrom(
