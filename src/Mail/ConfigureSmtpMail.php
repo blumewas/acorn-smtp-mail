@@ -48,7 +48,21 @@ class ConfigureSmtpMail
     {
         $mail->isSMTP();
 
-        $mail->SMTPDebug = $this->debug ? 2 : 0;
+        $mail->SMTPDebug = $this->debug ?? 0;
+
+
+        $mail->SMTPSecure = $this->secure;
+        $mail->SMTPOptions = [
+            'ssl' => [
+                'verify_peer' => false,
+                'verify_peer_name' => false,
+                'allow_self_signed' => true
+            ],
+        ];
+
+        $mail->SMTPAutoTLS = false;
+
+        $mail->Timeout = $this->timeout ?? 120;
 
         $mail->Host = $this->host;
         $mail->Port = $this->port;
@@ -58,11 +72,6 @@ class ConfigureSmtpMail
             $mail->Username = $this->username;
             $mail->Password = $this->password;
         }
-
-        $mail->SMTPSecure = $this->secure;
-        $mail->SMTPAutoTLS = false;
-
-        $mail->Timeout = $this->timeout ?? 120;
 
         if ($this->forcefrom && $this->forcefromname) {
             $mail->setFrom(

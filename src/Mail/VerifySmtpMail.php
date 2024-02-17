@@ -75,7 +75,20 @@ class VerifySmtpMail
         try {
             $mail->isSMTP();
 
-            $mail->SMTPDebug = $config['debug'] ? 2 : 0;
+            $mail->SMTPDebug = $config['debug'] ?? 0;
+
+            $mail->SMTPSecure = $config['secure'];
+            $mail->SMTPOptions = [
+                'ssl' => [
+                    'verify_peer' => false,
+                    'verify_peer_name' => false,
+                    'allow_self_signed' => true
+                ],
+            ];
+
+            $mail->SMTPAutoTLS = false;
+
+            $mail->Timeout = $config['timeout'] ?? 120;
 
             $mail->Host = $config['host'];
             $mail->Port = $config['port'];
@@ -86,10 +99,6 @@ class VerifySmtpMail
                 $mail->Password = $config['password'];
             }
 
-            $mail->SMTPSecure = $config['secure'];
-            $mail->SMTPAutoTLS = false;
-
-            $mail->Timeout = $config['timeout'] ?? 120;
 
             if ($config['forcefrom']) {
                 $mail->setFrom(
